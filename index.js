@@ -2,13 +2,19 @@ var debug = require("debug")("socketio-server:server");
 
 const express = require('express')
 const dotenv = require('dotenv')
+
 dotenv.config()
+
+
+const app = express()
 
 //const PORT = process.env.PORT || 9000;
 var port = normalizePort(process.env.PORT || "9000");
+const http = require('http').Server(app);
+
 const INDEX = '/index.html';
 
-const app = express()
+
 app.use((_req, res) => res.sendFile(INDEX, { root: __dirname }))
 
 const server = app.listen(port, () => console.log(`Listening on http://localhost:${port}...`));
